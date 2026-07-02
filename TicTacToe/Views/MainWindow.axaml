@@ -1,0 +1,61 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:TicTacToe.ViewModels"
+        x:Class="TicTacToe.Views.MainWindow"
+        Title="Tic Tac Toe"
+        Width="400"
+        Height="480"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.DataContext>
+        <vm:MainViewModel />
+    </Window.DataContext>
+
+    <StackPanel Margin="20" Spacing="15">
+
+        <TextBlock Text="Tic Tac Toe"
+                   FontSize="28"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Center" />
+
+        <TextBlock Text="{Binding StatusMessage}"
+                   FontSize="16"
+                   HorizontalAlignment="Center"
+                   Foreground="DarkSlateBlue" />
+
+        <TextBlock Text="{Binding ResultMessage}"
+                   FontSize="18"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Center"
+                   Foreground="Crimson" />
+
+        <!-- Grid : 3x3, generate from Cells -->
+        <ItemsControl ItemsSource="{Binding Cells}"
+                      HorizontalAlignment="Center">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Rows="3" Columns="3" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button Content="{Binding Symbol}"
+                            Command="{Binding ClickCommand}"
+                            FontSize="36" FontWeight="Bold"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"
+                            BorderBrush="Black" BorderThickness="2"
+                            Width="95" Height="95"
+                            Margin="2" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <Button Content="New Game"
+                Command="{Binding NewGameCommand}"
+                HorizontalAlignment="Center"
+                Padding="20,10"
+                FontSize="16" />
+
+    </StackPanel>
+</Window>
